@@ -1,4 +1,4 @@
-package com.eskere.inmobiliaria.ui.settings;
+package com.eskere.inmobiliaria.ui.inmuebles;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

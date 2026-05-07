@@ -1,4 +1,4 @@
-package com.eskere.inmobiliaria.ui.slideshow;
+package com.eskere.inmobiliaria.ui.inquilinos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

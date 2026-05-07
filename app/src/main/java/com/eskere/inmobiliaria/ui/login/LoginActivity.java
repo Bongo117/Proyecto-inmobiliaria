@@ -1,4 +1,4 @@
-package com.eskere.inmobiliaria.ui;
+package com.eskere.inmobiliaria.ui.login;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

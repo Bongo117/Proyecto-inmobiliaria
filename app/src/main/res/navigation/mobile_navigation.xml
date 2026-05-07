@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/nav_transform"
-        android:name="com.eskere.inmobiliaria.ui.transform.TransformFragment"
+        android:name="com.eskere.inmobiliaria.ui.contratos.TransformFragment"
         android:label="@string/menu_transform"
         tools:layout="@layout/fragment_transform" />
 
     <fragment
         android:id="@+id/nav_reflow"
-        android:name="com.eskere.inmobiliaria.ui.reflow.ReflowFragment"
+        android:name="com.eskere.inmobiliaria.ui.perfil.ReflowFragment"
         android:label="@string/menu_reflow"
         tools:layout="@layout/fragment_reflow" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.eskere.inmobiliaria.ui.slideshow.SlideshowFragment"
+        android:name="com.eskere.inmobiliaria.ui.inquilinos.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.eskere.inmobiliaria.ui.settings.SettingsFragment"
+        android:name="com.eskere.inmobiliaria.ui.inmuebles.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

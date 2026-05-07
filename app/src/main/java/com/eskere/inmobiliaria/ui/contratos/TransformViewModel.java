@@ -1,4 +1,4 @@
-package com.eskere.inmobiliaria.ui.transform;
+package com.eskere.inmobiliaria.ui.contratos;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
