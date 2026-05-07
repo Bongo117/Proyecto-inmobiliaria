@@ -3,11 +3,14 @@ package com.eskere.inmobiliaria.ui.login;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.eskere.inmobiliaria.api.ApiClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<String> tokenMutable;
-
     private MutableLiveData<String> errorMutable;
 
     public LiveData<String> getTokenMutable() {
@@ -24,6 +27,7 @@ public class LoginViewModel extends ViewModel {
         return errorMutable;
     }
 
+    // Método principal SIN 'return' directo de datos
     public void autenticar(String usuario, String clave) {
 
         if (usuario.isEmpty() || clave.isEmpty()) {
@@ -32,21 +36,26 @@ public class LoginViewModel extends ViewModel {
             return;
         }
 
-        //  Simulacion de la API Hasta que conectemos Retrofit
-        /*
-           el endpoint va a ser:
-           POST /api/Propietarios/login
-           Usuario de prueba: luisprofessor@gmail.com
-           Clave de prueba: DEEKQW
-        */
-        if (usuario.equals("luisprofessor@gmail.com") && clave.equals("DEEKQW")) {
-            // Éxito: Mandamos el Token simulado a la vista
-            getTokenMutable();
-            tokenMutable.setValue("TOKEN_JWT_SIMULADO_12345");
-        } else {
-            // Error: Mandamos el mensaje de error a la vista
-            getErrorMutable();
-            errorMutable.setValue("Credenciales incorrectas");
-        }
+        Call<String> call = ApiClient.getApiInmobiliaria().login(usuario, clave);
+
+        call.enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    getTokenMutable();
+                    tokenMutable.setValue(response.body());
+                } else {
+                    getErrorMutable();
+                    errorMutable.setValue("Credenciales incorrectas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                getErrorMutable();
+                errorMutable.setValue("Error de red: " + t.getMessage());
+            }
+        });
     }
 }
