@@ -13,7 +13,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ApiClient {
     public final static String BASE_URL = "https://capacitacion.alwaysdata.net/";
 
-    // Usamos TU interfaz separada, no una anidada
     private static ApiInmobiliaria apiInmobiliaria;
 
     public static ApiInmobiliaria getApiInmobiliaria() {

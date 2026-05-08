@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.eskere.inmobiliaria.MainActivity;
 import com.eskere.inmobiliaria.databinding.ActivityLoginBinding;
+import com.eskere.inmobiliaria.request.ApiClient;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,10 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         viewModel.getTokenMutable().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String tokenJWT) {
-                guardarToken(tokenJWT);
+                ApiClient.crearToken(LoginActivity.this, tokenJWT);
+
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-
                 finish();
             }
         });
