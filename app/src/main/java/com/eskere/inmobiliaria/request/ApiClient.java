@@ -20,7 +20,6 @@ public class ApiClient {
             Gson gson = new GsonBuilder().setLenient().create();
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    // Conversores en orden estratégico
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
