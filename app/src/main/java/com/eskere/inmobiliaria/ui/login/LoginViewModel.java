@@ -3,7 +3,7 @@ package com.eskere.inmobiliaria.ui.login;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.eskere.inmobiliaria.api.ApiClient;
+import com.eskere.inmobiliaria.request.ApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +27,7 @@ public class LoginViewModel extends ViewModel {
         return errorMutable;
     }
 
-    // Método principal SIN 'return' directo de datos
+
     public void autenticar(String usuario, String clave) {
 
         if (usuario.isEmpty() || clave.isEmpty()) {
