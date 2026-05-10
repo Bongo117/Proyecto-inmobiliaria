@@ -3,29 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_transform">
+    app:startDestination="@+id/nav_perfil">
 
     <fragment
-        android:id="@+id/nav_transform"
-        android:name="com.eskere.inmobiliaria.ui.contratos.TransformFragment"
-        android:label="@string/menu_transform"
-        tools:layout="@layout/fragment_transform" />
-
-    <fragment
-        android:id="@+id/nav_reflow"
+        android:id="@+id/nav_perfil"
         android:name="com.eskere.inmobiliaria.ui.perfil.ReflowFragment"
-        android:label="@string/menu_reflow"
+        android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_reflow" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_inmuebles"
+        android:name="com.eskere.inmobiliaria.ui.inmuebles.SettingsFragment"
+        android:label="@string/menu_inmuebles"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_inquilinos"
         android:name="com.eskere.inmobiliaria.ui.inquilinos.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_inquilinos"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.eskere.inmobiliaria.ui.inmuebles.SettingsFragment"
-        android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
+        android:id="@+id/nav_contratos"
+        android:name="com.eskere.inmobiliaria.ui.contratos.TransformFragment"
+        android:label="@string/menu_contratos"
+        tools:layout="@layout/fragment_transform" />
 </navigation>
