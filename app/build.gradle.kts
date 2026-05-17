@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation("org.maplibre.gl:android-sdk:11.11.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.recyclerview)
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.activity)
     implementation(libs.converter.gson)
+    implementation(libs.legacy.support.v4)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
