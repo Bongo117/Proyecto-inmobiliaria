@@ -7,9 +7,19 @@
 
     <fragment
         android:id="@+id/nav_perfil"
-        android:name="com.eskere.inmobiliaria.ui.perfil.ReflowFragment"
+        android:name="com.eskere.inmobiliaria.ui.perfil.PerfilFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_reflow" />
+        tools:layout="@layout/fragment_perfil">
+        <action
+            android:id="@+id/action_nav_perfil_to_nav_cambio_clave"
+            app:destination="@id/nav_cambio_clave" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_cambio_clave"
+        android:name="com.eskere.inmobiliaria.ui.cambioclave.CambioClaveFragment"
+        android:label="Cambiar Contraseña"
+        tools:layout="@layout/fragment_cambio_clave" />
 
     <fragment
         android:id="@+id/nav_inmuebles"
@@ -28,4 +38,9 @@
         android:name="com.eskere.inmobiliaria.ui.contratos.TransformFragment"
         android:label="@string/menu_contratos"
         tools:layout="@layout/fragment_transform" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.eskere.inmobiliaria.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout" />
 </navigation>
