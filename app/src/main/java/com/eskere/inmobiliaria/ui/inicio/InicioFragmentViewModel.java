@@ -25,7 +25,7 @@ public class InicioFragmentViewModel extends ViewModel {
         mapaMutable.setValue(new MapaActual());
     }
 
-    // Clase interna que implementa el Callback
+    // el Callback
     public static class MapaActual implements OnMapReadyCallback {
         @Override
         public void onMapReady(@NonNull MapLibreMap mapLibreMap) {
