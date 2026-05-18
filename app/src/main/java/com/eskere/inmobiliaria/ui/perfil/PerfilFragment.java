@@ -32,6 +32,9 @@ public class PerfilFragment extends Fragment {
                 binding.etApellido.setText(propietario.getApellido());
                 binding.etEmail.setText(propietario.getEmail());
                 binding.etTelefono.setText(propietario.getTelefono());
+                
+                binding.tvNombreTop.setText(propietario.getNombre());
+                binding.tvEmailTop.setText(propietario.getEmail());
             }
         });
 
@@ -51,9 +54,9 @@ public class PerfilFragment extends Fragment {
             binding.etId.setAlpha(0.5f);
 
             if (edicion) {
-                binding.btnEditarGuardar.setText("Guardar");
+                binding.btnEditarGuardar.setText("Guardar perfil");
             } else {
-                binding.btnEditarGuardar.setText("Editar");
+                binding.btnEditarGuardar.setText("Editar perfil");
             }
         });
 
