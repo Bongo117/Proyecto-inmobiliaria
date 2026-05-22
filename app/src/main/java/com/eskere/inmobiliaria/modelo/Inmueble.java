@@ -11,6 +11,10 @@ public class Inmueble implements Serializable {
     private int superficie;
     private double valor;
 
+    private String imagen;
+
+    private boolean disponible;
+
     public Inmueble() {
     }
 
@@ -68,5 +72,21 @@ public class Inmueble implements Serializable {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 }
