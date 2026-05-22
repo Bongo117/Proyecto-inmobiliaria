@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import com.eskere.inmobiliaria.R;
-import com.eskere.inmobiliaria.request.ApiClient;
 
 public class CambioClaveFragment extends Fragment {
 
@@ -43,8 +42,7 @@ public class CambioClaveFragment extends Fragment {
         btnGuardarClave.setOnClickListener(v -> {
             String actual = etClaveActual.getText().toString().trim();
             String nueva = etClaveNueva.getText().toString().trim();
-            String token = ApiClient.usarToken(requireContext());
-            cambioClaveViewModel.cambiarClave(token, actual, nueva);
+            cambioClaveViewModel.cambiarClave(actual, nueva);
         });
 
         return root;
