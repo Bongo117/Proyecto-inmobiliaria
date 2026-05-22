@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import com.eskere.inmobiliaria.R;
+import com.eskere.inmobiliaria.request.ApiClient;
 
 public class CambioClaveFragment extends Fragment {
 
@@ -23,7 +24,6 @@ public class CambioClaveFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         cambioClaveViewModel = new ViewModelProvider(this).get(CambioClaveViewModel.class);
-        cambioClaveViewModel.setContext(requireContext());
 
         View root = inflater.inflate(R.layout.fragment_cambio_clave, container, false);
 
@@ -43,7 +43,8 @@ public class CambioClaveFragment extends Fragment {
         btnGuardarClave.setOnClickListener(v -> {
             String actual = etClaveActual.getText().toString().trim();
             String nueva = etClaveNueva.getText().toString().trim();
-            cambioClaveViewModel.cambiarClave(actual, nueva);
+            String token = ApiClient.usarToken(requireContext());
+            cambioClaveViewModel.cambiarClave(token, actual, nueva);
         });
 
         return root;
