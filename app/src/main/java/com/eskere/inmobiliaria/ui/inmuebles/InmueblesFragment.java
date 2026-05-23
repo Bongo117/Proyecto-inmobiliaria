@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
+import com.eskere.inmobiliaria.R;
 import com.eskere.inmobiliaria.databinding.FragmentInmueblesBinding;
 
 public class InmueblesFragment extends Fragment {
@@ -37,8 +38,14 @@ public class InmueblesFragment extends Fragment {
         });
 
         viewModel.obtenerInmuebles();
-
+        binding.fabAgregarInmueble.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_nav_inmuebles_to_nav_inmuebles_agregar);
+            }
+        });
         return binding.getRoot();
+
     }
 
     @Override
