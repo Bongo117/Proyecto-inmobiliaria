@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:background="@color/input_bg_color"/>
 
         <TextView
             android:id="@+id/tvCodigoDetalle"
@@ -61,8 +62,8 @@
             android:id="@+id/tvPrecioDetalle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#388E3C"
+            android:textSize="20sp"
+            android:textColor="#4CAF50"
             android:textStyle="bold"
             android:text="Precio: $"
             android:layout_marginBottom="16dp"/>

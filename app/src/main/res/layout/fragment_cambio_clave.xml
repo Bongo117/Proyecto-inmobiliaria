@@ -24,9 +24,7 @@
         android:paddingStart="32dp"
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
-        android:paddingBottom="16dp"
-        android:textColor="#FF000000"
-        android:textColorHint="#99000000" />
+        android:paddingBottom="16dp" />
 
     <EditText
         android:id="@+id/etClaveNueva"
@@ -39,9 +37,7 @@
         android:paddingStart="32dp"
         android:paddingTop="16dp"
         android:paddingEnd="32dp"
-        android:paddingBottom="16dp"
-        android:textColor="#FF000000"
-        android:textColorHint="#99000000" />
+        android:paddingBottom="16dp" />
 
     <Button
         android:id="@+id/btnGuardarClave"

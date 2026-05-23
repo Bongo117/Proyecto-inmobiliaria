@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="6dp">
+    app:cardElevation="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,12 +13,12 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <!-- Acá Glide va a cargar la foto desde internet -->
         <ImageView
             android:id="@+id/ivFotoInmueble"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:background="@color/input_bg_color" />
 
         <TextView
             android:id="@+id/tvDireccionInmueble"
@@ -27,7 +27,6 @@
             android:layout_marginTop="8dp"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             android:text="Dirección de prueba"/>
 
         <TextView
@@ -36,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textSize="16sp"
-            android:textColor="#388E3C"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
             android:text="$ 0.0"/>
 
     </LinearLayout>

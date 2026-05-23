@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores para Inputs y Botones (Modo Noche) -->
+    <color name="input_bg_color">#33FFFFFF</color> <!-- Blanco muy transparente -->
+    <color name="input_stroke_color">#66FFFFFF</color>
+    <color name="button_bg_color">#FFBB86FC</color> <!-- Purple 200 para que resalte en oscuro -->
+</resources>
