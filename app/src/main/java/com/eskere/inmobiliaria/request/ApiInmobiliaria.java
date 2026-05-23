@@ -28,7 +28,8 @@ public interface ApiInmobiliaria {
     Call<List<Inmueble>> getInmuebles(@Header("Authorization") String token);
     @PUT("api/Propietarios/actualizar")
     Call<Propietario> actualizarPerfil(@Header("Authorization") String token, @retrofit2.http.Body Propietario propietario);
-
+    @PUT("api/Inmuebles/actualizar")
+    Call<Inmueble> actualizarInmueble(@Header("Authorization") String token, @retrofit2.http.Body Inmueble inmueble);
     @FormUrlEncoded
     @PUT("api/Propietarios/changePassword")
     Call<Void> cambiarClave(@Header("Authorization") String token, @Field("currentPassword") String currentPassword, @Field("newPassword") String newPassword);

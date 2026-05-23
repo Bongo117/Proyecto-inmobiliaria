@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,6 @@ public class DetalleInmuebleFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DetalleInmuebleViewModel.class);
 
         viewModel.getInmuebleMutable().observe(getViewLifecycleOwner(), inmueble -> {
-
             binding.tvCodigoDetalle.setText("Código: " + inmueble.getIdInmueble());
             binding.tvDireccionDetalle.setText("Dirección: " + inmueble.getDireccion());
             binding.tvUsoDetalle.setText("Uso: " + inmueble.getUso());
@@ -40,6 +40,19 @@ public class DetalleInmuebleFragment extends Fragment {
                     .load(urlImagen)
                     .into(binding.ivFotoDetalle);
         });
+
+        viewModel.getMensajeMutable().observe(getViewLifecycleOwner(), mensaje -> {
+            Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
+        });
+
+        binding.cbDisponible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean estaTildado = binding.cbDisponible.isChecked();
+                viewModel.actualizarEstado(estaTildado);
+            }
+        });
+
         viewModel.recuperarDatos(getArguments());
 
         return binding.getRoot();
