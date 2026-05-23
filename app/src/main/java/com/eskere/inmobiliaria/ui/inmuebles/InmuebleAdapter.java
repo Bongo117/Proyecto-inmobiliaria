@@ -1,13 +1,17 @@
 package com.eskere.inmobiliaria.ui.inmuebles;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.eskere.inmobiliaria.R;
 import com.eskere.inmobiliaria.databinding.ItemInmuebleBinding;
 import com.eskere.inmobiliaria.modelo.Inmueble;
 
@@ -37,13 +41,22 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         holder.binding.tvDireccionInmueble.setText(inmueble.getDireccion());
         holder.binding.tvPrecioInmueble.setText("$ " + inmueble.getValor());
 
-        // URL completa porque la API solo devuelve la ruta relativa
         String urlImagen = "https://capacitacion.alwaysdata.net/" + inmueble.getImagen();
 
-        // Magia de Glide
         Glide.with(context)
                 .load(urlImagen)
                 .into(holder.binding.ivFotoInmueble);
+
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+
+                bundle.putSerializable("inmueble", inmueble);
+
+                Navigation.findNavController(v).navigate(R.id.action_nav_inmuebles_to_nav_detalle_inmueble, bundle);
+            }
+        });
     }
 
     @Override

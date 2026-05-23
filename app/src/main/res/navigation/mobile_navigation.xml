@@ -9,7 +9,7 @@
         android:id="@+id/nav_inicio"
         android:name="com.eskere.inmobiliaria.ui.inicio.InicioFragment"
         android:label="Inicio"
-    tools:layout="@layout/fragment_inicio" />
+        tools:layout="@layout/fragment_inicio" />
 
     <fragment
         android:id="@+id/nav_perfil"
@@ -32,9 +32,14 @@
         android:name="com.eskere.inmobiliaria.ui.inmuebles.InmueblesFragment"
         android:label="@string/menu_inmuebles"
         tools:layout="@layout/fragment_inmuebles">
+
         <action
             android:id="@+id/action_nav_inmuebles_to_nav_inmuebles_agregar"
             app:destination="@id/nav_inmuebles_agregar" />
+
+        <action
+            android:id="@+id/action_nav_inmuebles_to_nav_detalle_inmueble"
+            app:destination="@id/nav_detalle_inmueble" />
     </fragment>
 
     <fragment
@@ -59,4 +64,10 @@
         android:id="@+id/nav_logout"
         android:name="com.eskere.inmobiliaria.ui.logout.LogoutFragment"
         android:label="@string/menu_logout" />
+
+    <fragment
+        android:id="@+id/nav_detalle_inmueble"
+        android:name="com.eskere.inmobiliaria.ui.inmueblesdetalle.DetalleInmuebleFragment"
+        android:label="Detalle de Inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" />
 </navigation>
