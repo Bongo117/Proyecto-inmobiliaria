@@ -36,9 +36,7 @@
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:textColor="#FF000000"
-            android:textColorHint="#99000000" />
+            android:paddingBottom="16dp" />
 
         <EditText
             android:id="@+id/etUso"
@@ -51,9 +49,7 @@
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:textColor="#FF000000"
-            android:textColorHint="#99000000" />
+            android:paddingBottom="16dp" />
 
         <EditText
             android:id="@+id/etTipo"
@@ -66,9 +62,7 @@
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:textColor="#FF000000"
-            android:textColorHint="#99000000" />
+            android:paddingBottom="16dp" />
 
         <EditText
             android:id="@+id/etAmbientes"
@@ -81,9 +75,7 @@
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:textColor="#FF000000"
-            android:textColorHint="#99000000" />
+            android:paddingBottom="16dp" />
 
         <EditText
             android:id="@+id/etSuperficie"
@@ -96,9 +88,7 @@
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:textColor="#FF000000"
-            android:textColorHint="#99000000" />
+            android:paddingBottom="16dp" />
 
         <EditText
             android:id="@+id/etValor"
@@ -111,9 +101,7 @@
             android:paddingStart="32dp"
             android:paddingTop="16dp"
             android:paddingEnd="32dp"
-            android:paddingBottom="16dp"
-            android:textColor="#FF000000"
-            android:textColorHint="#99000000" />
+            android:paddingBottom="16dp" />
 
         <Button
             android:id="@+id/btGuardar"
