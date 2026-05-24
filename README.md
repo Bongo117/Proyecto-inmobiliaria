@@ -1,30 +1,35 @@
 # Trabajo Práctico Inmobiliaria - Entrega 3
 
-Aplicación Android desarrollada para la gestión de inmuebles orientada a propietarios. En esta tercera entrega, habiendo consolidado la autenticación y el perfil, se implementó el módulo completo de Gestión de Inmuebles, incluyendo visualización en listas, subida de imágenes al servidor y actualización de estados, manteniendo un estricto apego al patrón de diseño MVVM.
+Aplicación Android diseñada para que los propietarios gestionen sus inmuebles. En esta tercera entrega, con la autenticación y el perfil ya consolidados, sumamos todo el módulo de inmuebles: ver el catálogo, subir fotos desde el dispositivo y cambiar el estado de disponibilidad, manteniendo la arquitectura MVVM bien prolija.
 
 ## Funcionalidades principales
-*   **Autenticación y Sesión:** Ingreso seguro de propietarios consumiendo una API REST mediante Retrofit, con almacenamiento de Token JWT (SharedPreferences) para mantener la sesión activa.
-*   **Ubicación de la Inmobiliaria (Mapa):** Implementación del SDK de **MapLibre** en conjunto con la API de **MapTiler** en el Fragment de Inicio para renderizar un mapa interactivo centrado en la ubicación estática de la agencia. 
-*   **Gestión de Perfil y Seguridad:** Visualización y edición de los datos personales del propietario. Módulo independiente para el cambio de clave seguro diseñado en una vista separada para garantizar la seguridad del hash en la base de datos.
-*   **Gestión de Inmuebles (Nuevo):** Visualización del catálogo de propiedades del dueño mediante un `RecyclerView`. Las imágenes de cada propiedad se descargan y cachean de forma asíncrona y eficiente utilizando la librería **Glide**.
-*   **Alta de Inmuebles con Foto (Nuevo):** Formulario dinámico para registrar una nueva propiedad (`POST /api/Inmuebles/cargar`). Permite seleccionar una fotografía desde la galería del dispositivo y enviarla al servidor mediante peticiones HTTP de tipo `multipart/form-data`.
-*   **Detalle y Disponibilidad (Nuevo):** Navegación fluida hacia el detalle completo de una propiedad pasando el objeto serializado a través de la arquitectura de navegación (`Bundle`). Permite al usuario habilitar o deshabilitar el inmueble actualizando su estado en tiempo real en la base de datos (`PUT /api/Inmuebles/actualizar`).
-*   **Cierre de Sesión (Logout):** Implementación de diálogos de confirmación modales (`AlertDialog`) que interactúan de forma segura con el ciclo de vida de la aplicación.
 
-## Arquitectura MVVM 
-El proyecto sigue el patrón arquitectónico Model-View-ViewModel, asegurando una separación total de responsabilidades. Se ha puesto especial énfasis en erradicar cualquier tipo de lógica de negocio o procesamiento de datos en la capa de la vista:
+* **Ingreso y Sesión:** Login conectado a la API mediante Retrofit. Guardamos el token JWT (en SharedPreferences) para que el usuario no tenga que volver a loguearse.
+* **Mapa de la Inmobiliaria:** En la pantalla de inicio integramos un mapa interactivo (usando el SDK de **MapLibre** junto a **MapTiler**) centrado en la ubicación física de la agencia.
+* **Perfil y Seguridad:** El dueño puede ver y editar sus datos personales. Armamos el cambio de contraseña en una vista independiente para manejar de forma segura el hash en la base de datos.
+* **Gestión de Inmuebles (Nuevo):** 
+  * **Catálogo:** Una lista (`RecyclerView`) para ver todas las propiedades. Usamos **Glide** para que las imágenes se descarguen y almacenen en caché de forma eficiente.
+  * **Alta con Foto:** Formulario dinámico para registrar propiedades (`POST /api/Inmuebles/cargar`). Permite elegir una foto de la galería y mandarla al servidor mediante peticiones `multipart/form-data`.
+  * **Detalles y Estado:** Navegación fluida hacia la info completa pasando el objeto a través de `Bundle`. Incluye un CheckBox para habilitar o deshabilitar el inmueble, actualizando la base de datos en tiempo real (`PUT /api/Inmuebles/actualizar`).
+* **Cierre de Sesión (Logout):** Cierre seguro mediante un diálogo de confirmación (`AlertDialog`) antes de salir.
 
-*   **Modelo:** 
-    *   *Mapeo de Datos:* Clases estructuradas que implementan `Serializable` (`Propietario`, `Inmueble`) para parsear las respuestas JSON y facilitar el paso de argumentos entre fragmentos.
-    *   *Capa de Red:* Configuración ampliada de `ApiClient` y la interfaz de Retrofit, incorporando el manejo de `@Multipart` para la subida de archivos binarios (`RequestBody`, `MultipartBody.Part`) junto a las cabeceras de autorización Bearer.
-*   **Vistas (Activities y Fragments):** 
-    *   Son vistas 100% pasivas. Se limitan exclusivamente a inflar el diseño (ViewBinding), capturar interacciones del usuario y renderizar componentes visuales únicamente cuando el ViewModel emite el evento correspondiente. 
-    *   **Navegación Segura:** El enrutamiento se gestiona a través del `NavController` (`mobile_navigation.xml`).
-*   **ViewModels:** 
-    *   Contienen toda la lógica de negocio, cálculos y validaciones. 
-    *   **Procesamiento Centralizado:** Los ViewModels son los únicos encargados de deserializar y extraer datos de los `Bundle` o `Intents`, así como de transformar las URIs de las imágenes a arreglos de bytes para su posterior subida.
-    *   Toda la comunicación hacia la vista se realiza de forma reactiva exponiendo objetos `LiveData` / `MutableLiveData` para notificar actualizaciones de datos, errores de red o mensajes para Toasts.
+## Arquitectura (MVVM)
+
+Nos pusimos bastante estrictos con separar las responsabilidades. La vista solo muestra la interfaz y el ViewModel se encarga de todo el trabajo pesado:
+
+### Modelo
+* **Mapeo de datos:** Clases estructuradas (`Propietario`, `Inmueble`) que implementan `Serializable` para parsear los JSON y pasar datos entre pantallas.
+* **Capa de red:** Configuración de `ApiClient` e interfaces de Retrofit, sumando el manejo de `@Multipart` para subir archivos binarios (`MultipartBody.Part`) junto a las cabeceras Bearer.
+
+### Vistas (Activities y Fragments)
+* Se limitan exclusivamente a inflar el diseño con **ViewBinding**, capturar interacciones del usuario y renderizar componentes visuales cuando el ViewModel avisa.
+* El enrutamiento de pantallas se gestiona mediante el `NavController` (`mobile_navigation.xml`).
+
+### ViewModels
+* Son el cerebro de la app: contienen la lógica de negocio, validaciones y transformaciones de datos.
+* Son los únicos encargados de extraer datos de los `Bundle`, así como de transformar las URIs de las imágenes a arreglos de bytes para la subida.
+* Toda la comunicación hacia la vista se hace de forma reactiva exponiendo objetos `LiveData` / `MutableLiveData` (para actualizar datos, errores de red o alertas).
 
 ## Integrantes
-*   **Soto Vela Luciano Ezequiel** - DNI: 42799718
-*   **Grippo Federico** - DNI: 44752589
+* **Soto Vela Luciano Ezequiel** - DNI: 42799718
+* **Grippo Federico** - DNI: 44752589
