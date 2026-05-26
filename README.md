@@ -1,27 +1,35 @@
-# Trabajo Práctico Inmobiliaria - Entrega 2
+# Trabajo Práctico Inmobiliaria - Entrega 3
 
-Aplicación Android desarrollada para la gestión de inmuebles orientada a propietarios. En esta segunda entrega, sobre los cimientos de la autenticación con API REST, se implementó la navegación interna, la gestión del perfil del usuario y la visualización de mapas interactivos, implementando el patrón de diseño MVVM.
+Aplicación Android diseñada para que los propietarios gestionen sus inmuebles. En esta tercera entrega, con la autenticación y el perfil ya consolidados, sumamos todo el módulo de inmuebles: ver el catálogo, subir fotos desde el dispositivo y cambiar el estado de disponibilidad, manteniendo la arquitectura MVVM bien prolija.
 
 ## Funcionalidades principales
-*   **Autenticación y Sesión:** Ingreso seguro de propietarios consumiendo una API REST mediante Retrofit, con almacenamiento de Token JWT (SharedPreferences) para mantener la sesión activa.
-*   **Ubicación de la Inmobiliaria (Mapa):** Implementación del SDK de **MapLibre** en conjunto con la API de **MapTiler** en el Fragment de Inicio para renderizar un mapa interactivo centrado en la ubicación estática de la agencia. 
-*   **Gestión de Perfil:** Visualización y edición de los datos personales del propietario logueado, consumiendo los endpoints `GET` y `PUT` de la API de la cátedra.
-*   **Cambio de Contraseña Seguro:** Módulo independiente para el cambio de clave (`PUT /api/Propietarios/changePassword`) diseñado en una vista separada para garantizar la seguridad y evitar la corrupción de los *hashes* en la base de datos del servidor.
-*   **Cierre de Sesión (Logout):** Implementación de diálogos de confirmación modales que interactúan de forma segura con el ciclo de vida de la aplicación.
 
-## Arquitectura MVVM
-El proyecto sigue el patrón arquitectónico Model-View-ViewModel, asegurando una separación total de responsabilidades y cero lógica de negocio o referencias al contexto de Android dentro de los ViewModels:
+* **Ingreso y Sesión:** Login conectado a la API mediante Retrofit. Guardamos el token JWT (en SharedPreferences) para que el usuario no tenga que volver a loguearse.
+* **Mapa de la Inmobiliaria:** En la pantalla de inicio integramos un mapa interactivo (usando el SDK de **MapLibre** junto a **MapTiler**) centrado en la ubicación física de la agencia.
+* **Perfil y Seguridad:** El dueño puede ver y editar sus datos personales. Armamos el cambio de contraseña en una vista independiente para manejar de forma segura el hash en la base de datos.
+* **Gestión de Inmuebles (Nuevo):** 
+  * **Catálogo:** Una lista (`RecyclerView`) para ver todas las propiedades. Usamos **Glide** para que las imágenes se descarguen y almacenen en caché de forma eficiente.
+  * **Alta con Foto:** Formulario dinámico para registrar propiedades (`POST /api/Inmuebles/cargar`). Permite elegir una foto de la galería y mandarla al servidor mediante peticiones `multipart/form-data`.
+  * **Detalles y Estado:** Navegación fluida hacia la info completa pasando el objeto a través de `Bundle`. Incluye un CheckBox para habilitar o deshabilitar el inmueble, actualizando la base de datos en tiempo real (`PUT /api/Inmuebles/actualizar`).
+* **Cierre de Sesión (Logout):** Cierre seguro mediante un diálogo de confirmación (`AlertDialog`) antes de salir.
 
-*   **Modelo:** 
-    *   *Mapeo de Datos:* Clases estructuradas (`Propietario`, `Inmueble`) para serializar las respuestas JSON de la API.
-    *   *Capa de Red:* Configuración ampliada de `ApiClient` e `ApiInmobiliaria` incorporando los nuevos métodos GET y PUT con cabeceras de autorización Bearer.
-*   **Vistas (Activities y Fragments):** 
-    *   Se limitan exclusivamente a inflar el diseño (ViewBinding), capturar interacciones del usuario y dibujar componentes visuales (como los `Toast` o `AlertDialog`) únicamente cuando el ViewModel emite el evento correspondiente. 
-    *   Se gestiona estrictamente el ciclo de vida de los componentes visuales complejos (como el MapView) delegando sus métodos (`onStart`, `onResume`, etc.) para evitar fugas de memoria (*Memory Leaks*).
-*   **ViewModels:** 
-    *   Contienen toda la lógica de negocio y validación. Toman las decisiones sobre el estado de la UI (por ejemplo, habilitar/deshabilitar los campos de edición en el Perfil) y manejan las peticiones asíncronas a Retrofit y la configuración de MapLibre. 
-    *   Toda la comunicación hacia la vista se realiza de forma reactiva exponiendo objetos `LiveData` / `MutableLiveData`.
+## Arquitectura (MVVM)
+
+Nos pusimos bastante estrictos con separar las responsabilidades. La vista solo muestra la interfaz y el ViewModel se encarga de todo el trabajo pesado:
+
+### Modelo
+* **Mapeo de datos:** Clases estructuradas (`Propietario`, `Inmueble`) que implementan `Serializable` para parsear los JSON y pasar datos entre pantallas.
+* **Capa de red:** Configuración de `ApiClient` e interfaces de Retrofit, sumando el manejo de `@Multipart` para subir archivos binarios (`MultipartBody.Part`) junto a las cabeceras Bearer.
+
+### Vistas (Activities y Fragments)
+* Se limitan exclusivamente a inflar el diseño con **ViewBinding**, capturar interacciones del usuario y renderizar componentes visuales cuando el ViewModel avisa.
+* El enrutamiento de pantallas se gestiona mediante el `NavController` (`mobile_navigation.xml`).
+
+### ViewModels
+* Son el cerebro de la app: contienen la lógica de negocio, validaciones y transformaciones de datos.
+* Son los únicos encargados de extraer datos de los `Bundle`, así como de transformar las URIs de las imágenes a arreglos de bytes para la subida.
+* Toda la comunicación hacia la vista se hace de forma reactiva exponiendo objetos `LiveData` / `MutableLiveData` (para actualizar datos, errores de red o alertas).
 
 ## Integrantes
-*   **Soto Vela Luciano Ezequiel** - DNI: 42799718
-*   **Grippo Federico** - DNI: 44752589
+* **Soto Vela Luciano Ezequiel** - DNI: 42799718
+* **Grippo Federico** - DNI: 44752589
