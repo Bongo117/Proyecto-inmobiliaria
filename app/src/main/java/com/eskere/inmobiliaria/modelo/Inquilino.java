@@ -3,6 +3,7 @@ package com.eskere.inmobiliaria.modelo;
 import java.io.Serializable;
 
 public class Inquilino implements Serializable {
+
     private int idInquilino;
     private String dni;
     private String nombre;
@@ -10,7 +11,10 @@ public class Inquilino implements Serializable {
     private String email;
     private String telefono;
     private String nombreGarante;
+    private String telefonoGarante; // <-- Movido arriba con los demás
 
+    public Inquilino() {
+    }
     public String getApellido() {
         return apellido;
     }
@@ -74,6 +78,4 @@ public class Inquilino implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
-    private String telefonoGarante;
 }
