@@ -1,5 +1,6 @@
 package com.eskere.inmobiliaria.request;
 
+import com.eskere.inmobiliaria.modelo.Contrato;
 import com.eskere.inmobiliaria.modelo.Inmueble;
 import com.eskere.inmobiliaria.modelo.Propietario;
 
@@ -16,6 +17,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface ApiInmobiliaria {
 
@@ -26,6 +28,10 @@ public interface ApiInmobiliaria {
     Call<Propietario> getPropietario(@Header("Authorization") String token);
     @GET("api/Inmuebles")
     Call<List<Inmueble>> getInmuebles(@Header("Authorization") String token);
+    @GET("api/Inmuebles/GetContratoVigente")
+    Call<List<Inmueble>> obtenerInmueblesAlquilados(@Header("Authorization") String token);
+    @GET("api/contratos/inmueble/{id}")
+    Call<Contrato> obtenerContratoPorInmueble(@Header("Authorization") String token, @Path("id") int idInmueble);
     @PUT("api/Propietarios/actualizar")
     Call<Propietario> actualizarPerfil(@Header("Authorization") String token, @retrofit2.http.Body Propietario propietario);
     @PUT("api/Inmuebles/actualizar")
