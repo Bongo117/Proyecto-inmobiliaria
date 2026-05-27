@@ -50,9 +50,14 @@
 
     <fragment
         android:id="@+id/nav_inquilinos"
-        android:name="com.eskere.inmobiliaria.ui.inquilinos.SlideshowFragment"
+        android:name="com.eskere.inmobiliaria.ui.inquilinos.InquilinosFragment"
         android:label="@string/menu_inquilinos"
         tools:layout="@layout/fragment_slideshow" />
+    <action
+        android:id="@+id/action_nav_inquilinos_to_nav_detalle_inquilino"
+        app:destination="@id/nav_detalle_inquilino" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_contratos"
