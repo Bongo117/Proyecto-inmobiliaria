@@ -85,4 +85,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etClave" />
 
+    <TextView
+        android:id="@+id/tvOlvidePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#3F51B5"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="3.0"
+        android:text="¿Olvidaste tu contraseña?"
+        android:textColor="#8CFFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/background_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
 </androidx.constraintlayout.widget.ConstraintLayout>

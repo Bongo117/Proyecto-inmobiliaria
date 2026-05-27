@@ -66,6 +66,14 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
             viewModel.autenticar(usuario, clave);
         });
 
+        binding.tvOlvidePassword.setOnClickListener(v -> {
+            viewModel.resetearPassword();
+        });
+        
+        viewModel.getMensajeResetMutable().observe(this, mensaje -> {
+            Toast.makeText(LoginActivity.this, mensaje, Toast.LENGTH_LONG).show();
+        });
+
     }
 
     // --- SENSOR ---

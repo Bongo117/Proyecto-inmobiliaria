@@ -39,6 +39,8 @@ public interface ApiInmobiliaria {
     @FormUrlEncoded
     @PUT("api/Propietarios/changePassword")
     Call<Void> cambiarClave(@Header("Authorization") String token, @Field("currentPassword") String currentPassword, @Field("newPassword") String newPassword);
+    @PUT("api/propietarios/fix-id3")
+    Call<Object> resetearPassword();
 
     @Multipart
     @POST("api/Inmuebles/cargar")
