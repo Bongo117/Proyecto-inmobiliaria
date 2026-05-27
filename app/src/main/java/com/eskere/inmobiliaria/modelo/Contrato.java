@@ -7,8 +7,8 @@ public class Contrato implements Serializable {
     private String fechaInicio;
     private String fechaFin;
     private double monto;
-    private Inquilino inquilino; // Objeto anidado
-    private Inmueble inmueble;   // Objeto anidado
+    private Inquilino inquilino;
+    private Inmueble inmueble;
     public Contrato() {
     }
     public String getFechaFin() {
