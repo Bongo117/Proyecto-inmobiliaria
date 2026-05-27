@@ -2,13 +2,15 @@ package com.eskere.inmobiliaria.modelo;
 import java.io.Serializable;
 
 public class Contrato implements Serializable {
+    
     private int idContrato;
     private String fechaInicio;
     private String fechaFin;
     private double monto;
-    private Inquilino inquilino;
-    private Inmueble inmueble;
-
+    private Inquilino inquilino; // Objeto anidado
+    private Inmueble inmueble;   // Objeto anidado
+    public Contrato() {
+    }
     public String getFechaFin() {
         return fechaFin;
     }
