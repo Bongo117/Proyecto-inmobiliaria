@@ -3,25 +3,38 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Contrato implements Serializable {
-    
+
     @SerializedName("idContrato")
     private int idContrato;
-    
+
     @SerializedName(value = "fechaInicio", alternate = {"FechaInicio", "fechaDesde", "desde"})
     private String fechaInicio;
-    
+
     @SerializedName(value = "fechaFin", alternate = {"FechaFin", "fechaHasta", "hasta"})
     private String fechaFin;
-    
+
     @SerializedName(value = "monto", alternate = {"Monto", "precio", "importe"})
     private double monto;
-    
+
     @SerializedName("inquilino")
     private Inquilino inquilino;
-    
+
     @SerializedName("inmueble")
     private Inmueble inmueble;
+
+    // 2. CONSTRUCTOR VACÍO
     public Contrato() {
+    }
+
+    public String getDireccionAMostrar() {
+        return (inmueble != null) ? inmueble.getDireccion() : "Sin dirección";
+    }
+
+    public String getNombreInquilinoCompleto() {
+        if (inquilino != null) {
+            return inquilino.getNombre() + " " + inquilino.getApellido();
+        }
+        return "Sin inquilino";
     }
     public String getFechaFin() {
         return fechaFin;

@@ -37,8 +37,9 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Contrato contrato = listaContratos.get(position);
 
-        holder.binding.tvDireccionContrato.setText(contrato.getInmueble() != null ? contrato.getInmueble().getDireccion() : "Sin dirección");
-        holder.binding.tvInquilinoContrato.setText(contrato.getInquilino() != null ? contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido() : "Sin inquilino");
+        holder.binding.tvDireccionContrato.setText(contrato.getDireccionAMostrar());
+        holder.binding.tvInquilinoContrato.setText(contrato.getNombreInquilinoCompleto());
+
         holder.binding.tvMontoContrato.setText("$ " + contrato.getMonto());
         holder.binding.tvFechaInicioContrato.setText("Inicio: " + contrato.getFechaInicio());
 

@@ -30,10 +30,9 @@ public class ContratoDetalleFragment extends Fragment {
             binding.tvFechaInicioContrato.setText("Fecha inicio: " + contrato.getFechaInicio());
             binding.tvFechaFinContrato.setText("Fecha fin: " + contrato.getFechaFin());
             binding.tvMontoContrato.setText("Monto: $" + contrato.getMonto());
-            binding.tvInquilinoContrato.setText("Inquilino: " +
-                    (contrato.getInquilino() != null ? contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido() : "Sin inquilino"));
-            binding.tvDireccionContrato.setText("Dirección: " +
-                    (contrato.getInmueble() != null ? contrato.getInmueble().getDireccion() : "Sin dirección"));
+
+            binding.tvInquilinoContrato.setText("Inquilino: " + contrato.getNombreInquilinoCompleto());
+            binding.tvDireccionContrato.setText("Dirección: " + contrato.getDireccionAMostrar());
 
             binding.btnPagos.setOnClickListener(new View.OnClickListener() {
                 @Override
