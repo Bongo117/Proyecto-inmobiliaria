@@ -1,17 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Inmobiliaria" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/azul_sofisticado</item>
+        <item name="colorPrimaryVariant">#0D1B2A</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+
+
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="drawerArrowStyle">@style/CustomDrawerArrowStyle</item>
+        <item name="android:statusBarColor">@color/azul_sofisticado</item>
         <item name="android:fontFamily">@font/dm_sans</item>
         <item name="fontFamily">@font/dm_sans</item>
         <item name="editTextStyle">@style/AppEditText</item>
@@ -19,7 +18,7 @@
         <item name="materialButtonStyle">@style/AppButton</item>
     </style>
 
-    <!-- Global EditText style -->
+
     <style name="AppEditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/input_background_dark</item>
         <item name="android:paddingTop">16dp</item>
@@ -28,14 +27,12 @@
         <item name="android:paddingEnd">32dp</item>
     </style>
 
-    <!-- Estilo específico para Login (fijo en claro) -->
     <style name="LoginEditText" parent="AppEditText">
         <item name="android:background">@drawable/input_background</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">#CCFFFFFF</item>
     </style>
 
-    <!-- Global Button style -->
     <style name="AppButton" parent="Widget.MaterialComponents.Button">
         <item name="android:background">@drawable/button_background</item>
         <item name="android:paddingTop">16dp</item>
@@ -56,4 +53,7 @@
     <style name="Theme.Inmobiliaria.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Inmobiliaria.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="CustomDrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
+    </style>
 </resources>

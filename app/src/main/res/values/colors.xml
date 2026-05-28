@@ -8,8 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Colores para Inputs y Botones (Modo Claro) -->
-    <color name="input_bg_color">#1A000000</color> <!-- Negro muy transparente -->
+    <color name="azul_sofisticado">#1B263B</color>
+    <color name="azul_claro_acento">#415A77</color>
+    <color name="blanco_puro">#FFFFFF</color>
+    <color name="gris_texto_suave">#E0E1DD</color>
+    <color name="texto_suave">#B0B8D1</color>
+
+    <color name="input_bg_color">#1A000000</color>
     <color name="input_stroke_color">#4D000000</color>
-    <color name="button_bg_color">#0f1c38</color> <!-- Tu azul oscuro actual -->
+    <color name="button_bg_color">#1B263B</color>
 </resources>
