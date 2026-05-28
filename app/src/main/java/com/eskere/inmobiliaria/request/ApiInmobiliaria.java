@@ -32,6 +32,8 @@ public interface ApiInmobiliaria {
     Call<List<Inmueble>> obtenerInmueblesAlquilados(@Header("Authorization") String token);
     @GET("api/contratos/inmueble/{id}")
     Call<Contrato> obtenerContratoPorInmueble(@Header("Authorization") String token, @Path("id") int idInmueble);
+    @GET("api/Contratos")
+    Call<List<Contrato>> getContratos(@Header("Authorization") String token);
     @PUT("api/Propietarios/actualizar")
     Call<Propietario> actualizarPerfil(@Header("Authorization") String token, @retrofit2.http.Body Propietario propietario);
     @PUT("api/Inmuebles/actualizar")

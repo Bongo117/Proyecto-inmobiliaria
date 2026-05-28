@@ -1,0 +1,47 @@
+package com.eskere.inmobiliaria.ui.contratos;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.eskere.inmobiliaria.databinding.FragmentDetalleContratoBinding;
+
+public class ContratoDetalleFragment extends Fragment {
+
+    private FragmentDetalleContratoBinding binding;
+    private ContratoDetalleViewModel viewModel;
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        binding = FragmentDetalleContratoBinding.inflate(inflater, container, false);
+        viewModel = new ViewModelProvider(this).get(ContratoDetalleViewModel.class);
+
+        viewModel.getContratoMutable().observe(getViewLifecycleOwner(), contrato -> {
+            binding.tvCodigoContrato.setText("Código: " + contrato.getIdContrato());
+            binding.tvFechaInicioContrato.setText("Fecha inicio: " + contrato.getFechaInicio());
+            binding.tvFechaFinContrato.setText("Fecha fin: " + contrato.getFechaFin());
+            binding.tvMontoContrato.setText("Monto: $" + contrato.getMonto());
+            binding.tvInquilinoContrato.setText("Inquilino: " +
+                    (contrato.getInquilino() != null ? contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido() : "Sin inquilino"));
+            binding.tvDireccionContrato.setText("Dirección: " +
+                    (contrato.getInmueble() != null ? contrato.getInmueble().getDireccion() : "Sin dirección"));
+        });
+
+        viewModel.recuperarDatos(getArguments());
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+}

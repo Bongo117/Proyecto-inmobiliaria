@@ -65,9 +65,20 @@
         android:label="Detalle del Inquilino" />
     <fragment
         android:id="@+id/nav_contratos"
-        android:name="com.eskere.inmobiliaria.ui.contratos.TransformFragment"
+        android:name="com.eskere.inmobiliaria.ui.contratos.ContratosFragment"
         android:label="@string/menu_contratos"
-        tools:layout="@layout/fragment_transform" />
+        tools:layout="@layout/fragment_contratos">
+
+        <action
+            android:id="@+id/action_nav_contratos_to_nav_detalle_contrato"
+            app:destination="@id/nav_detalle_contrato" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_detalle_contrato"
+        android:name="com.eskere.inmobiliaria.ui.contratos.ContratoDetalleFragment"
+        android:label="Detalle de Contrato"
+        tools:layout="@layout/fragment_detalle_contrato" />
 
     <fragment
         android:id="@+id/nav_logout"
