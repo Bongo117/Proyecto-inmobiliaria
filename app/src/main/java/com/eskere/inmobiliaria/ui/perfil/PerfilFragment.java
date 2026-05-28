@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.eskere.inmobiliaria.R;
 import com.eskere.inmobiliaria.databinding.FragmentPerfilBinding;
-import com.eskere.inmobiliaria.modelo.Propietario;
 
 public class PerfilFragment extends Fragment {
 
@@ -35,48 +36,42 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        perfilViewModel.getEdicion().observe(getViewLifecycleOwner(), edicion -> {
-            binding.etDni.setEnabled(edicion);
-            binding.etNombre.setEnabled(edicion);
-            binding.etApellido.setEnabled(edicion);
-            binding.etEmail.setEnabled(edicion);
-            binding.etTelefono.setEnabled(edicion);
+        perfilViewModel.getEstadoEdicion().observe(getViewLifecycleOwner(), habilitado -> {
+            binding.etDni.setEnabled(habilitado);
+            binding.etNombre.setEnabled(habilitado);
+            binding.etApellido.setEnabled(habilitado);
+            binding.etEmail.setEnabled(habilitado);
+            binding.etTelefono.setEnabled(habilitado);
+        });
 
-            float alpha = edicion ? 1.0f : 0.5f;
+        perfilViewModel.getAlphaCampos().observe(getViewLifecycleOwner(), alpha -> {
             binding.etDni.setAlpha(alpha);
             binding.etNombre.setAlpha(alpha);
             binding.etApellido.setAlpha(alpha);
             binding.etEmail.setAlpha(alpha);
             binding.etTelefono.setAlpha(alpha);
             binding.etId.setAlpha(0.5f);
+        });
 
-            if (edicion) {
-                binding.btnEditarGuardar.setText("Guardar");
-            } else {
-                binding.btnEditarGuardar.setText("Editar");
-            }
+        perfilViewModel.getTextoBoton().observe(getViewLifecycleOwner(), texto -> {
+            binding.btnEditarGuardar.setText(texto);
         });
 
         binding.btnCambiarClave.setOnClickListener(v -> {
-            androidx.navigation.Navigation.findNavController(v).navigate(com.eskere.inmobiliaria.R.id.action_nav_perfil_to_nav_cambio_clave);
+            Navigation.findNavController(v).navigate(R.id.action_nav_perfil_to_nav_cambio_clave);
         });
 
+
         binding.btnEditarGuardar.setOnClickListener(v -> {
-            Boolean edicion = perfilViewModel.getEdicion().getValue();
-            if (edicion != null && edicion) {
-                Propietario p = new Propietario(
-                        Integer.parseInt(binding.etId.getText().toString()),
-                        binding.etNombre.getText().toString(),
-                        binding.etApellido.getText().toString(),
-                        binding.etDni.getText().toString(),
-                        binding.etTelefono.getText().toString(),
-                        binding.etEmail.getText().toString(),
-                        null
-                );
-                perfilViewModel.guardarPerfil(p);
-            } else {
-                perfilViewModel.toggleEdicion();
-            }
+
+            String id = binding.etId.getText().toString();
+            String nombre = binding.etNombre.getText().toString();
+            String apellido = binding.etApellido.getText().toString();
+            String dni = binding.etDni.getText().toString();
+            String telefono = binding.etTelefono.getText().toString();
+            String email = binding.etEmail.getText().toString();
+
+            perfilViewModel.accionBotonEditarGuardar(id, nombre, apellido, dni, telefono, email);
         });
 
         perfilViewModel.obtenerPerfil();

@@ -19,7 +19,11 @@ import retrofit2.Response;
 public class PerfilViewModel extends AndroidViewModel {
 
     private MutableLiveData<Propietario> mPropietario;
-    private MutableLiveData<Boolean> mEdicion;
+
+    private MutableLiveData<Boolean> estadoEdicionMutable;
+    private MutableLiveData<String> textoBotonMutable;
+    private MutableLiveData<Float> alphaCamposMutable;
+
     private Context context;
 
     public PerfilViewModel(@NonNull Application application) {
@@ -34,12 +38,28 @@ public class PerfilViewModel extends AndroidViewModel {
         return mPropietario;
     }
 
-    public LiveData<Boolean> getEdicion() {
-        if (mEdicion == null) {
-            mEdicion = new MutableLiveData<>();
-            mEdicion.setValue(false);
+    public LiveData<Boolean> getEstadoEdicion() {
+        if (estadoEdicionMutable == null) {
+            estadoEdicionMutable = new MutableLiveData<>();
+            estadoEdicionMutable.setValue(false);
         }
-        return mEdicion;
+        return estadoEdicionMutable;
+    }
+
+    public LiveData<String> getTextoBoton() {
+        if (textoBotonMutable == null) {
+            textoBotonMutable = new MutableLiveData<>();
+            textoBotonMutable.setValue("Editar");
+        }
+        return textoBotonMutable;
+    }
+
+    public LiveData<Float> getAlphaCampos() {
+        if (alphaCamposMutable == null) {
+            alphaCamposMutable = new MutableLiveData<>();
+            alphaCamposMutable.setValue(0.5f);
+        }
+        return alphaCamposMutable;
     }
 
     public void obtenerPerfil() {
@@ -64,13 +84,36 @@ public class PerfilViewModel extends AndroidViewModel {
         }
     }
 
-    public void toggleEdicion() {
-        if (mEdicion.getValue() != null) {
-            mEdicion.setValue(!mEdicion.getValue());
+    public void accionBotonEditarGuardar(String id, String nombre, String apellido, String dni, String telefono, String email) {
+        Boolean enEdicion = estadoEdicionMutable.getValue();
+
+        if (enEdicion != null && enEdicion) {
+
+            try {
+                Propietario p = new Propietario(
+                        Integer.parseInt(id),
+                        nombre,
+                        apellido,
+                        dni,
+                        telefono,
+                        email,
+                        null
+                );
+                guardarPerfil(p);
+            } catch (NumberFormatException e) {
+                Toast.makeText(context, "Error con el ID del usuario.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            activarModoEdicion(true);
         }
     }
+    private void activarModoEdicion(boolean activar) {
+        estadoEdicionMutable.setValue(activar);
+        textoBotonMutable.setValue(activar ? "Guardar" : "Editar");
+        alphaCamposMutable.setValue(activar ? 1.0f : 0.5f);
+    }
 
-    public void guardarPerfil(Propietario propietario) {
+    private void guardarPerfil(Propietario propietario) {
         String token = ApiClient.usarToken(context);
         if (token != null) {
             Call<Propietario> call = ApiClient.getApiInmobiliaria().actualizarPerfil(token, propietario);
@@ -81,10 +124,11 @@ public class PerfilViewModel extends AndroidViewModel {
                         if (response.body() != null) {
                             mPropietario.setValue(response.body());
                         } else {
-                            obtenerPerfil(); 
+                            obtenerPerfil();
                         }
-                        mEdicion.setValue(false);
-                        Toast.makeText(context, "Perfil actualizado", Toast.LENGTH_SHORT).show();
+
+                        activarModoEdicion(false);
+                        Toast.makeText(context, "Perfil actualizado exitosamente", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "Error al actualizar", Toast.LENGTH_SHORT).show();
                     }
