@@ -37,6 +37,11 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        viewModel.getLlamarInmobiliariaMutable().observe(this, hacerLlamada -> {
+            if (hacerLlamada != null && hacerLlamada) {
+                hacerLlamada();
+            }
+        });
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null) {
@@ -102,35 +107,13 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
             float y = event.values[1];
             float z = event.values[2];
 
-            double aceleracion = Math.sqrt(x * x + y * y + z * z) - SensorManager.GRAVITY_EARTH;
-
-            // fuerza requerida 6 para que no sea tan sensible
-            if (aceleracion > 6) {
-                long tiempoActual = System.currentTimeMillis();
-
-                // Si pasaron más de 3 segundos desde la última sacudida, el usuario se detuvo.
-                // Reseteamos el contador para que tenga que hacer 3 juntas.
-                if (tiempoActual - ultimoTiempoShake > 3000) {
-                    contadorSacudidas = 0;
-                }
-
-                // Ponemos un freno demedio segundo entre cada golpe4 para que el sensor no cuente el mismo ida y vuelta del brazo como 5 sacudidas.
-                if ((tiempoActual - ultimoTiempoShake) > 500) {
-                    ultimoTiempoShake = tiempoActual;
-                    contadorSacudidas++; // Sumamos 1 sacudida válida
-
-                    //Si el contador llego a 3 hacemos la llamada
-                    if (contadorSacudidas >= 3) {
-                        hacerLlamada();
-                        contadorSacudidas = 0; // Reseteamos por si corta y quiere volver a agitar
-                    }
-                }
-            }
+            viewModel.procesarMovimientoSensor(x, y, z);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Queda vacío pero es obligatorio implementarlo
     }
 
     // --- Llamada al profe jeje ---

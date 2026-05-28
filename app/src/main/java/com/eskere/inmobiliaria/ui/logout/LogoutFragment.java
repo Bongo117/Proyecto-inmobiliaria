@@ -23,7 +23,6 @@ public class LogoutFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = new View(requireContext());
 
-        // Instanciamos el ViewModel
         vm = new ViewModelProvider(this).get(LogoutViewModel.class);
 
 
@@ -41,7 +40,6 @@ public class LogoutFragment extends Fragment {
                 .setTitle("Cerrar Sesión")
                 .setMessage("¿Estás seguro de que deseas cerrar sesión?")
                 .setPositiveButton("Sí", (dialog, which) -> {
-                    // CERO LÓGICA ACÁ: Le delegamos el trabajo sucio al ViewModel
                     vm.cerrarSesion();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {

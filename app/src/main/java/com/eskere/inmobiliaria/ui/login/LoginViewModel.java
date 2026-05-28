@@ -39,7 +39,6 @@ public class LoginViewModel extends AndroidViewModel {
         return mensajeResetMutable;
     }
 
-    // --- MÉTODO 1: AUTENTICAR ---
     public void autenticar(String usuario, String clave) {
 
         if (usuario.isEmpty() || clave.isEmpty()) {
@@ -89,5 +88,40 @@ public class LoginViewModel extends AndroidViewModel {
                 mensajeResetMutable.setValue("Fallo de red: " + t.getMessage());
             }
         });
+    }
+    // ---EL SENSOR ---
+    private MutableLiveData<Boolean> llamarInmobiliariaMutable;
+    private long ultimoTiempoShake = 0;
+    private int contadorSacudidas = 0;
+
+    public LiveData<Boolean> getLlamarInmobiliariaMutable() {
+        if (llamarInmobiliariaMutable == null) {
+            llamarInmobiliariaMutable = new MutableLiveData<>();
+        }
+        return llamarInmobiliariaMutable;
+    }
+
+    // El cerebro hace la matemática y cuenta
+    public void procesarMovimientoSensor(float x, float y, float z) {
+        // Usamos la constante estática de SensorManager para la gravedad
+        double aceleracion = Math.sqrt(x * x + y * y + z * z) - android.hardware.SensorManager.GRAVITY_EARTH;
+
+        if (aceleracion > 6) {
+            long tiempoActual = System.currentTimeMillis();
+
+            if (tiempoActual - ultimoTiempoShake > 3000) {
+                contadorSacudidas = 0;
+            }
+
+            if ((tiempoActual - ultimoTiempoShake) > 500) {
+                ultimoTiempoShake = tiempoActual;
+                contadorSacudidas++;
+
+                if (contadorSacudidas >= 3) {
+                    llamarInmobiliariaMutable.setValue(true);
+                    contadorSacudidas = 0;
+                }
+            }
+        }
     }
 }
