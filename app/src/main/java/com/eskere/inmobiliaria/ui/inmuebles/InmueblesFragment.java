@@ -37,6 +37,19 @@ public class InmueblesFragment extends Fragment {
             Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
         });
 
+        binding.svBuscador.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                viewModel.buscar(newText);
+                return true;
+            }
+        });
+
         viewModel.obtenerInmuebles();
         binding.fabAgregarInmueble.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,6 +10,7 @@ import com.eskere.inmobiliaria.modelo.Inmueble;
 import com.eskere.inmobiliaria.request.ApiClient;
 import com.eskere.inmobiliaria.request.ApiInmobiliaria;
 
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +20,8 @@ public class InquilinosViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Inmueble>> inmueblesAlquiladosMutable;
     private MutableLiveData<String> errorMutable;
+
+    private List<Inmueble> listaCompleta = new ArrayList<>();
 
     public InquilinosViewModel(@NonNull Application application) {
         super(application);
@@ -47,7 +50,8 @@ public class InquilinosViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    inmueblesAlquiladosMutable.setValue(response.body());
+                    listaCompleta = response.body(); // Guardamos la original
+                    inmueblesAlquiladosMutable.setValue(listaCompleta);
                 } else {
                     errorMutable.setValue("No se encontraron inmuebles alquilados.");
                 }
@@ -59,4 +63,19 @@ public class InquilinosViewModel extends AndroidViewModel {
             }
         });
     }
-}
+    public void buscar(String texto) {
+        if (texto.isEmpty()) {
+            inmueblesAlquiladosMutable.setValue(listaCompleta);
+            return;
+        }
+
+        String busqueda = texto.toLowerCase();
+        List<Inmueble> filtrados = new ArrayList<>();
+        for (Inmueble i : listaCompleta) {
+            // metodo formateado para evitar nulos
+            if (i.getDireccionFormateada().toLowerCase().contains(busqueda)) {
+                filtrados.add(i);
+            }
+        }
+        inmueblesAlquiladosMutable.setValue(filtrados);
+    }}

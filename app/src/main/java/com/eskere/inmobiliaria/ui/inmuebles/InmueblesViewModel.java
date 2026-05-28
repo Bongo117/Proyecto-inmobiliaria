@@ -5,11 +5,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.eskere.inmobiliaria.modelo.Inmueble;
 import com.eskere.inmobiliaria.request.ApiClient;
 import com.eskere.inmobiliaria.request.ApiInmobiliaria;
-
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,8 +17,9 @@ import retrofit2.Response;
 public class InmueblesViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Inmueble>> inmueblesMutable = new MutableLiveData<>();
-
     private MutableLiveData<String> errorMutable = new MutableLiveData<>();
+    
+    private List<Inmueble> listaCompleta = new ArrayList<>();
 
     public InmueblesViewModel(@NonNull Application application) {
         super(application);
@@ -34,9 +34,7 @@ public class InmueblesViewModel extends AndroidViewModel {
     }
 
     public void obtenerInmuebles() {
-
         String token = ApiClient.usarToken(getApplication());
-
         ApiInmobiliaria api = ApiClient.getApiInmobiliaria();
         Call<List<Inmueble>> call = api.getInmuebles(token);
 
@@ -44,7 +42,8 @@ public class InmueblesViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    inmueblesMutable.setValue(response.body());
+                    listaCompleta = response.body(); 
+                    inmueblesMutable.setValue(listaCompleta);
                 } else {
                     errorMutable.setValue("Error al obtener inmuebles.");
                 }
@@ -55,5 +54,22 @@ public class InmueblesViewModel extends AndroidViewModel {
                 errorMutable.setValue("Fallo de red: " + t.getMessage());
             }
         });
+    }
+    
+    public void buscar(String texto) {
+        if (texto.isEmpty()) {
+            inmueblesMutable.setValue(listaCompleta);
+            return;
+        }
+        
+        String busqueda = texto.toLowerCase();
+        List<Inmueble> filtrados = new ArrayList<>();
+        for (Inmueble i : listaCompleta) {
+            // metodo formateado para evitar nulos
+            if (i.getDireccionFormateada().toLowerCase().contains(busqueda)) {
+                filtrados.add(i);
+            }
+        }
+        inmueblesMutable.setValue(filtrados);
     }
 }
