@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCodigoContrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Código: "
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvFechaInicioContrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Fecha inicio: "
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvFechaFinContrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Fecha fin: "
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvMontoContrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#4CAF50"
+            android:textStyle="bold"
+            android:text="Monto: $"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvInquilinoContrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Inquilino: "
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvDireccionContrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Dirección: "
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnPagos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAGOS"
+            android:backgroundTint="@color/button_bg_color" />
+
+    </LinearLayout>
+</ScrollView>
