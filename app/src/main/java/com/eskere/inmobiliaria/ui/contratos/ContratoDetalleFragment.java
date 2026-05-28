@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.eskere.inmobiliaria.R;
 import com.eskere.inmobiliaria.databinding.FragmentDetalleContratoBinding;
 
 public class ContratoDetalleFragment extends Fragment {
@@ -32,6 +34,15 @@ public class ContratoDetalleFragment extends Fragment {
                     (contrato.getInquilino() != null ? contrato.getInquilino().getNombre() + " " + contrato.getInquilino().getApellido() : "Sin inquilino"));
             binding.tvDireccionContrato.setText("Dirección: " +
                     (contrato.getInmueble() != null ? contrato.getInmueble().getDireccion() : "Sin dirección"));
+
+            binding.btnPagos.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("idContrato", contrato.getIdContrato());
+                    Navigation.findNavController(v).navigate(R.id.action_nav_detalle_contrato_to_nav_pagos, bundle);
+                }
+            });
         });
 
         viewModel.recuperarDatos(getArguments());

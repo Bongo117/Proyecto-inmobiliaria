@@ -2,6 +2,7 @@ package com.eskere.inmobiliaria.request;
 
 import com.eskere.inmobiliaria.modelo.Contrato;
 import com.eskere.inmobiliaria.modelo.Inmueble;
+import com.eskere.inmobiliaria.modelo.Pago;
 import com.eskere.inmobiliaria.modelo.Propietario;
 
 import java.util.List;
@@ -34,6 +35,8 @@ public interface ApiInmobiliaria {
     Call<Contrato> obtenerContratoPorInmueble(@Header("Authorization") String token, @Path("id") int idInmueble);
     @GET("api/Contratos")
     Call<List<Contrato>> getContratos(@Header("Authorization") String token);
+    @GET("api/Pagos/contrato/{id}")
+    Call<List<Pago>> obtenerPagosPorContrato(@Header("Authorization") String token, @Path("id") int idContrato);
     @PUT("api/Propietarios/actualizar")
     Call<Propietario> actualizarPerfil(@Header("Authorization") String token, @retrofit2.http.Body Propietario propietario);
     @PUT("api/Inmuebles/actualizar")

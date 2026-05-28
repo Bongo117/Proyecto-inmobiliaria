@@ -78,7 +78,18 @@
         android:id="@+id/nav_detalle_contrato"
         android:name="com.eskere.inmobiliaria.ui.contratos.ContratoDetalleFragment"
         android:label="Detalle de Contrato"
-        tools:layout="@layout/fragment_detalle_contrato" />
+        tools:layout="@layout/fragment_detalle_contrato">
+
+        <action
+            android:id="@+id/action_nav_detalle_contrato_to_nav_pagos"
+            app:destination="@id/nav_pagos" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pagos"
+        android:name="com.eskere.inmobiliaria.ui.pagos.PagosFragment"
+        android:label="Pagos"
+        tools:layout="@layout/fragment_pagos" />
 
     <fragment
         android:id="@+id/nav_logout"

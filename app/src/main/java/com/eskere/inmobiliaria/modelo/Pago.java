@@ -1,12 +1,22 @@
 package com.eskere.inmobiliaria.modelo;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Pago implements Serializable {
+    @SerializedName("idPago")
     private int idPago;
+    
+    @SerializedName(value = "numero", alternate = {"nroPago", "numeroPago"})
     private int nroPago;
+    
+    @SerializedName(value = "idContrato", alternate = {"idAlquiler", "contratoId"})
     private int idAlquiler;
+    
+    @SerializedName(value = "fechaDePago", alternate = {"fechaPago", "fecha"})
     private String fecha;
+    
+    @SerializedName(value = "importe", alternate = {"monto"})
     private double importe;
 
     public Pago() {}
