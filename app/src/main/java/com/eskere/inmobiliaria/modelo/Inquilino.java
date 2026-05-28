@@ -11,7 +11,7 @@ public class Inquilino implements Serializable {
     private String email;
     private String telefono;
     private String nombreGarante;
-    private String telefonoGarante; // <-- Movido arriba con los demás
+    private String telefonoGarante;
 
     public Inquilino() {
     }
@@ -78,4 +78,13 @@ public class Inquilino implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public String getCodigoFormateado() { return "Código: " + idInquilino; }
+    public String getNombreFormateado() { return "Nombre: " + nombre; }
+    public String getApellidoFormateado() { return "Apellido: " + apellido; }
+    public String getDniFormateado() { return "DNI: " + dni; }
+    public String getEmailFormateado() { return "E-mail: " + email; }
+    public String getTelefonoFormateado() { return "Teléfono: " + telefono; }
+    public String getGaranteFormateado() { return "Garante: " + nombreGarante; }
+    public String getTelefonoGaranteFormateado() { return "Teléfono Garante: " + telefonoGarante; }
 }

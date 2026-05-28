@@ -44,9 +44,8 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.View
 
         holder.binding.tvDireccionInquilino.setText(inmueble.getDireccion());
 
-        String urlImagen = "https://capacitacion.alwaysdata.net/" + inmueble.getImagen();
         Glide.with(context)
-                .load(urlImagen)
+                .load(inmueble.getUrlImagenOriginal())
                 .into(holder.binding.ivFotoInquilino);
 
         holder.binding.btnVerInquilino.setOnClickListener(new View.OnClickListener() {

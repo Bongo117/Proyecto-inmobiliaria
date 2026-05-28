@@ -25,14 +25,14 @@ public class DetalleInquilinoFragment extends Fragment {
         vm = new ViewModelProvider(this).get(DetalleInquilinoViewModel.class);
 
         vm.getInquilinoMutable().observe(getViewLifecycleOwner(), inquilino -> {
-            binding.tvCodigoInquilino.setText("Código: " + inquilino.getIdInquilino());
-            binding.tvNombreInquilino.setText("Nombre: " + inquilino.getNombre());
-            binding.tvApellidoInquilino.setText("Apellido: " + inquilino.getApellido());
-            binding.tvDniInquilino.setText("DNI: " + inquilino.getDni());
-            binding.tvEmailInquilino.setText("E-mail: " + inquilino.getEmail());
-            binding.tvTelefonoInquilino.setText("Teléfono: " + inquilino.getTelefono());
-            binding.tvGarante.setText("Garante: " + inquilino.getNombreGarante());
-            binding.tvTelefonoGarante.setText("Teléfono Garante: " + inquilino.getTelefonoGarante());
+            binding.tvCodigoInquilino.setText(inquilino.getCodigoFormateado());
+            binding.tvNombreInquilino.setText(inquilino.getNombreFormateado());
+            binding.tvApellidoInquilino.setText(inquilino.getApellidoFormateado());
+            binding.tvDniInquilino.setText(inquilino.getDniFormateado());
+            binding.tvEmailInquilino.setText(inquilino.getEmailFormateado());
+            binding.tvTelefonoInquilino.setText(inquilino.getTelefonoFormateado());
+            binding.tvGarante.setText(inquilino.getGaranteFormateado());
+            binding.tvTelefonoGarante.setText(inquilino.getTelefonoGaranteFormateado());
         });
 
         vm.getErrorMutable().observe(getViewLifecycleOwner(), error -> {

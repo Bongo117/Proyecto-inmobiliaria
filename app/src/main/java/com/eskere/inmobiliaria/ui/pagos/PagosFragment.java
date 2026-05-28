@@ -36,7 +36,7 @@ public class PagosFragment extends Fragment {
         });
 
         viewModel.getErrorMutable().observe(getViewLifecycleOwner(), error -> {
-            Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
         });
 
         viewModel.recuperarDatos(getArguments());

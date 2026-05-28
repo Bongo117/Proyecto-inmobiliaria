@@ -26,18 +26,17 @@ public class DetalleInmuebleFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(DetalleInmuebleViewModel.class);
 
         viewModel.getInmuebleMutable().observe(getViewLifecycleOwner(), inmueble -> {
-            binding.tvCodigoDetalle.setText("Código: " + inmueble.getIdInmueble());
-            binding.tvDireccionDetalle.setText("Dirección: " + inmueble.getDireccion());
-            binding.tvUsoDetalle.setText("Uso: " + inmueble.getUso());
-            binding.tvTipoDetalle.setText("Tipo: " + inmueble.getTipo());
-            binding.tvAmbientesDetalle.setText("Ambientes: " + inmueble.getAmbientes());
-            binding.tvPrecioDetalle.setText("Precio: $" + inmueble.getValor());
-
+            binding.tvCodigoDetalle.setText(inmueble.getCodigoFormateado());
+            binding.tvDireccionDetalle.setText(inmueble.getDireccionFormateada());
+            binding.tvUsoDetalle.setText(inmueble.getUsoFormateado());
+            binding.tvTipoDetalle.setText(inmueble.getTipoFormateado());
+            binding.tvAmbientesDetalle.setText(inmueble.getAmbientesFormateado());
+            binding.tvPrecioDetalle.setText(inmueble.getPrecioFormateado());
             binding.cbDisponible.setChecked(inmueble.isDisponible());
 
-            String urlImagen = "https://capacitacion.alwaysdata.net/" + inmueble.getImagen();
+            // La vista le pide la URL lista al modelo
             Glide.with(requireContext())
-                    .load(urlImagen)
+                    .load(inmueble.getUrlImagenOriginal())
                     .into(binding.ivFotoDetalle);
         });
 

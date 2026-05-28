@@ -89,4 +89,15 @@ public class Inmueble implements Serializable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+
+    public String getUrlImagenOriginal() {
+        return "https://capacitacion.alwaysdata.net/" + imagen;
+    }
+    public String getCodigoFormateado() { return "Código: " + idInmueble; }
+    public String getDireccionFormateada() { return "Dirección: " + direccion; }
+    public String getUsoFormateado() { return "Uso: " + uso; }
+    public String getTipoFormateado() { return "Tipo: " + tipo; }
+    public String getAmbientesFormateado() { return "Ambientes: " + ambientes; }
+    public String getPrecioFormateado() { return "Precio: $" + valor; }
+
 }

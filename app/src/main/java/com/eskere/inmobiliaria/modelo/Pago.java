@@ -20,6 +20,25 @@ public class Pago implements Serializable {
     private double importe;
 
     public Pago() {}
+    public String getCodigoPagoFormateado() {
+        return "Pago #" + idPago;
+    }
+
+    public String getNroPagoFormateado() {
+        return "Nro: " + nroPago;
+    }
+
+    public String getContratoFormateado() {
+        return "Contrato: " + idAlquiler;
+    }
+
+    public String getImporteFormateado() {
+        return "$ " + importe;
+    }
+
+    public String getFechaFormateada() {
+        return "Fecha: " + fecha;
+    }
 
     public String getFecha() {
         return fecha;

@@ -43,7 +43,7 @@ public class InmueblesAgregarFragment extends Fragment {
         });
 
         vm.getMensajeMutable().observe(getViewLifecycleOwner(), mensaje -> {
-            Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
         });
 
         b.btCargarImagen.setOnClickListener(view -> {

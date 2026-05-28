@@ -39,21 +39,18 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         Inmueble inmueble = listaInmuebles.get(position);
 
         holder.binding.tvDireccionInmueble.setText(inmueble.getDireccion());
-        holder.binding.tvPrecioInmueble.setText("$ " + inmueble.getValor());
+        holder.binding.tvPrecioInmueble.setText(inmueble.getPrecioFormateado());
 
-        String urlImagen = "https://capacitacion.alwaysdata.net/" + inmueble.getImagen();
-
+        // Llamamos directamente al modelo para la url
         Glide.with(context)
-                .load(urlImagen)
+                .load(inmueble.getUrlImagenOriginal())
                 .into(holder.binding.ivFotoInmueble);
 
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-
                 bundle.putSerializable("inmueble", inmueble);
-
                 Navigation.findNavController(v).navigate(R.id.action_nav_inmuebles_to_nav_detalle_inmueble, bundle);
             }
         });

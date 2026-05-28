@@ -33,11 +33,12 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Pago pago = listaPagos.get(position);
 
-        holder.binding.tvCodigoPago.setText("Pago #" + pago.getIdPago());
-        holder.binding.tvNroPago.setText("Nro: " + pago.getNroPago());
-        holder.binding.tvIdContratoPago.setText("Contrato: " + pago.getIdAlquiler());
-        holder.binding.tvImportePago.setText("$ " + pago.getImporte());
-        holder.binding.tvFechaPago.setText("Fecha: " + pago.getFecha());
+        // la vista solo dibuja lo que le da el modelo
+        holder.binding.tvCodigoPago.setText(pago.getCodigoPagoFormateado());
+        holder.binding.tvNroPago.setText(pago.getNroPagoFormateado());
+        holder.binding.tvIdContratoPago.setText(pago.getContratoFormateado());
+        holder.binding.tvImportePago.setText(pago.getImporteFormateado());
+        holder.binding.tvFechaPago.setText(pago.getFechaFormateada());
     }
 
     @Override
