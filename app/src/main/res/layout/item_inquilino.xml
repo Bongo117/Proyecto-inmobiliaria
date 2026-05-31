@@ -4,22 +4,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivFotoInquilino"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:background="@color/input_bg_color"
+            android:src="@drawable/ic_launcher_background"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.MediumComponent" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,23 +34,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dirección del Inmueble"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#212121" />
+                android:textSize="20sp"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
 
-            <View
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Estado: Alquilado"
+                android:textSize="14sp"
+                android:alpha="0.7" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnVerInquilino"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:layout_marginTop="8dp"
                 android:text="VER DETALLE"
-                android:textColor="@color/purple_500"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:icon="@android:drawable/ic_menu_send"
+                app:iconGravity="end" />
 
         </LinearLayout>
     </LinearLayout>
