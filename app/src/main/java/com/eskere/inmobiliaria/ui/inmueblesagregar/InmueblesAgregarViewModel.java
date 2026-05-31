@@ -76,6 +76,7 @@ public class InmueblesAgregarViewModel extends AndroidViewModel {
                 i.setSuperficie(Integer.parseInt(superficie));
                 i.setValor(Double.parseDouble(valor));
                 byte[] imagen = transformarImagen();
+                i.setDisponible(false);
                 if (imagen.length == 0) {
                     mensajeMutable.setValue("Debe ingresar imagen");
                     return;
