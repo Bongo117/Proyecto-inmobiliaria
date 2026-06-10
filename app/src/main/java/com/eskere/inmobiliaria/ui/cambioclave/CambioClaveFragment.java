@@ -4,47 +4,58 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import com.eskere.inmobiliaria.R;
+
+import com.eskere.inmobiliaria.databinding.FragmentCambioClaveBinding;
 
 public class CambioClaveFragment extends Fragment {
 
     private CambioClaveViewModel cambioClaveViewModel;
-    private EditText etClaveActual;
-    private EditText etClaveNueva;
-    private Button btnGuardarClave;
+    private FragmentCambioClaveBinding b;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+     
         cambioClaveViewModel = new ViewModelProvider(this).get(CambioClaveViewModel.class);
 
-        View root = inflater.inflate(R.layout.fragment_cambio_clave, container, false);
 
-        etClaveActual = root.findViewById(R.id.etClaveActual);
-        etClaveNueva = root.findViewById(R.id.etClaveNueva);
-        btnGuardarClave = root.findViewById(R.id.btnGuardarClave);
+        b = FragmentCambioClaveBinding.inflate(inflater, container, false);
+
 
         cambioClaveViewModel.getMensajeExito().observe(getViewLifecycleOwner(), mensaje -> {
             Toast.makeText(getContext(), mensaje, Toast.LENGTH_SHORT).show();
-            Navigation.findNavController(root).popBackStack();
+
+            Navigation.findNavController(b.getRoot()).popBackStack();
         });
+
 
         cambioClaveViewModel.getMensajeError().observe(getViewLifecycleOwner(), mensaje -> {
             Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
         });
 
-        btnGuardarClave.setOnClickListener(v -> {
-            String actual = etClaveActual.getText().toString().trim();
-            String nueva = etClaveNueva.getText().toString().trim();
+
+        b.btnGuardarClave.setOnClickListener(v -> {
+            String actual = b.etClaveActual.getText().toString().trim();
+            String nueva = b.etClaveNueva.getText().toString().trim();
+
+
             cambioClaveViewModel.cambiarClave(actual, nueva);
         });
 
-        return root;
+
+        return b.getRoot();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        b = null;
     }
 }

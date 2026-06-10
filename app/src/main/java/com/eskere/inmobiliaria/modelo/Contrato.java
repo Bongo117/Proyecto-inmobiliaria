@@ -22,7 +22,6 @@ public class Contrato implements Serializable {
     @SerializedName("inmueble")
     private Inmueble inmueble;
 
-    // 2. CONSTRUCTOR VACÍO
     public Contrato() {
     }
 
